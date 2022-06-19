@@ -82,4 +82,13 @@ public class ContactService {
         LOG.info("Successfully deleted contact details for a given id.");
     }
 
+    /**
+     * This method logs in a contact for given credentials
+     */
+    public boolean login(Contact contact) {
+        Optional<Contact> login = contactRepository.findByEmailAndCountry(contact.getEmail(), contact.getCountry());
+        LOG.info("Contact found for given credentials.");
+        return login.isPresent();
+    }
+
 }

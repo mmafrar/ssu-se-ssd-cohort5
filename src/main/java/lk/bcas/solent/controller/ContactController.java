@@ -53,4 +53,19 @@ public class ContactController {
         return "redirect:/read-contact";
     }
 
+    @GetMapping("/login-contact")
+    public String showLoginPage(Model model) {
+        model.addAttribute("command", new Contact());
+        return "login";
+    }
+
+    @PostMapping("/login-contact")
+    public String login(@ModelAttribute("contact") Contact contact) {
+        boolean isPresent = contactService.login(contact);
+        if (isPresent)
+            return "redirect:/read-contact";
+        else
+            return "redirect:/create-contact";
+    }
+
 }
